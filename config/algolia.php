@@ -40,9 +40,9 @@ return [
     'connections' => [
 
         'main' => [
-            'id' => env('ALGOLIA_ID'),
+            'id'         => env('ALGOLIA_ID'),
             'search_key' => env('ALGOLIA_SEARCH_KEY'),
-            'key' => env('ALGOLIA_KEY'),
+            'key'        => env('ALGOLIA_KEY'),
         ],
 
     ],

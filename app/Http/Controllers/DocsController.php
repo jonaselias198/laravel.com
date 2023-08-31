@@ -18,7 +18,8 @@ class DocsController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \App\Documentation  $docs
+     * @param \App\Documentation $docs
+     *
      * @return void
      */
     public function __construct(Documentation $docs)
@@ -39,8 +40,9 @@ class DocsController extends Controller
     /**
      * Show the documentation index JSON representation.
      *
-     * @param  string  $version
-     * @param  \App\Documentation  $docs
+     * @param string             $version
+     * @param \App\Documentation $docs
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
     public function index($version, Documentation $docs)
@@ -51,7 +53,7 @@ class DocsController extends Controller
             $version = $major = 'master';
         }
 
-        if (! $this->isVersion($version)) {
+        if (!$this->isVersion($version)) {
             return redirect('docs/'.DEFAULT_VERSION.'/index.json', 301);
         }
 
@@ -65,17 +67,18 @@ class DocsController extends Controller
     /**
      * Show a documentation page.
      *
-     * @param  string  $version
-     * @param  string|null  $page
+     * @param string      $version
+     * @param string|null $page
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function show($version, $page = null)
     {
-        if (! $this->isVersion($version)) {
+        if (!$this->isVersion($version)) {
             return redirect('docs/'.DEFAULT_VERSION.'/'.$version, 301);
         }
 
-        if (! defined('CURRENT_VERSION')) {
+        if (!defined('CURRENT_VERSION')) {
             define('CURRENT_VERSION', $version);
         }
 
@@ -86,16 +89,16 @@ class DocsController extends Controller
             $otherVersions = $this->docs->versionsContainingPage($page);
 
             return response()->view('docs', [
-                'title' => 'Page not found',
-                'index' => $this->docs->getIndex($version),
+                'title'   => 'Page not found',
+                'index'   => $this->docs->getIndex($version),
                 'content' => view('docs-missing', [
                     'otherVersions' => $otherVersions,
-                    'page' => $page,
+                    'page'          => $page,
                 ]),
                 'currentVersion' => $version,
-                'versions' => Documentation::getDocVersions(),
+                'versions'       => Documentation::getDocVersions(),
                 'currentSection' => $otherVersions->isEmpty() ? '' : '/'.$page,
-                'canonical' => null,
+                'canonical'      => null,
             ], 404);
         }
 
@@ -105,7 +108,7 @@ class DocsController extends Controller
 
         if ($this->docs->sectionExists($version, $page)) {
             $section .= '/'.$page;
-        } elseif (! is_null($page)) {
+        } elseif (!is_null($page)) {
             return redirect('/docs/'.$version);
         }
 
@@ -116,20 +119,21 @@ class DocsController extends Controller
         }
 
         return view('docs', [
-            'title' => count($title) ? $title->text() : null,
-            'index' => $this->docs->getIndex($version),
-            'content' => $content,
+            'title'          => count($title) ? $title->text() : null,
+            'index'          => $this->docs->getIndex($version),
+            'content'        => $content,
             'currentVersion' => $version,
-            'versions' => Documentation::getDocVersions(),
+            'versions'       => Documentation::getDocVersions(),
             'currentSection' => $section,
-            'canonical' => $canonical,
+            'canonical'      => $canonical,
         ]);
     }
 
     /**
      * Determine if the given URL segment is a valid version.
      *
-     * @param  string  $version
+     * @param string $version
+     *
      * @return bool
      */
     protected function isVersion($version)

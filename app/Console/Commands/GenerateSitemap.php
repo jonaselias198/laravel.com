@@ -35,7 +35,7 @@ class GenerateSitemap extends Command
         SitemapGenerator::create(config('app.url'))
             ->shouldCrawl(function (UriInterface $url) {
                 // Crawl everything without "docs" in the path, as we'll crawl the docs separately...
-                return ! Str::contains($url->getPath(), 'docs');
+                return !Str::contains($url->getPath(), 'docs');
             })
             ->hasCrawled(function (Url $url) {
                 if ($url->segment(1) === 'team') {

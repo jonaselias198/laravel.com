@@ -2,11 +2,11 @@
 
 namespace App;
 
-use Illuminate\Support\Str;
-use Illuminate\Filesystem\Filesystem;
 use App\Markdown\GithubFlavoredMarkdownConverter;
 use Carbon\CarbonInterval;
 use Illuminate\Contracts\Cache\Repository as Cache;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 
 class Documentation
 {
@@ -27,8 +27,9 @@ class Documentation
     /**
      * Create a new documentation instance.
      *
-     * @param  \Illuminate\Filesystem\Filesystem  $files
-     * @param  \Illuminate\Contracts\Cache\Repository  $cache
+     * @param \Illuminate\Filesystem\Filesystem      $files
+     * @param \Illuminate\Contracts\Cache\Repository $cache
+     *
      * @return void
      */
     public function __construct(Filesystem $files, Cache $cache)
@@ -40,7 +41,8 @@ class Documentation
     /**
      * Get the documentation index page.
      *
-     * @param  string  $version
+     * @param string $version
+     *
      * @return string|null
      */
     public function getIndex($version)
@@ -59,8 +61,9 @@ class Documentation
     /**
      * Get the given documentation page.
      *
-     * @param  string  $version
-     * @param  string  $page
+     * @param string $version
+     * @param string $page
+     *
      * @return string|null
      */
     public function get($version, $page)
@@ -83,7 +86,8 @@ class Documentation
     /**
      * Get the array based index representation of the documentation.
      *
-     * @param  string  $version
+     * @param string $version
+     *
      * @return array
      */
     public function indexArray($version)
@@ -91,7 +95,7 @@ class Documentation
         return $this->cache->remember('docs.{'.$version.'}.index', CarbonInterval::hour(1), function () use ($version) {
             $path = base_path('resources/docs/'.$version.'/documentation.md');
 
-            if (! $this->files->exists($path)) {
+            if (!$this->files->exists($path)) {
                 return [];
             }
 
@@ -108,10 +112,10 @@ class Documentation
 
                         return [
                             (string) Str::of($path)->afterLast('/')->before('.md') => [
-                                'title' => $page['title'],
+                                'title'    => $page['title'],
                                 'sections' => collect($section['fragments'])
                                     ->combine($section['titles'])
-                                    ->map(fn ($title) => ['title' => $title])
+                                    ->map(fn ($title) => ['title' => $title]),
                             ],
                         ];
                     }),
@@ -122,8 +126,9 @@ class Documentation
     /**
      * Replace the version place-holder in links.
      *
-     * @param  string  $version
-     * @param  string  $content
+     * @param string $version
+     * @param string $content
+     *
      * @return string
      */
     public static function replaceLinks($version, $content)
@@ -134,9 +139,10 @@ class Documentation
     /**
      * Check if the given section exists.
      *
-     * @param  string  $version
-     * @param  string  $page
-     * @return boolean
+     * @param string $version
+     * @param string $page
+     *
+     * @return bool
      */
     public function sectionExists($version, $page)
     {
@@ -148,7 +154,8 @@ class Documentation
     /**
      * Determine which versions a page exists in.
      *
-     * @param  string  $page
+     * @param string $page
+     *
      * @return \Illuminate\Support\Collection
      */
     public function versionsContainingPage($page)
@@ -160,7 +167,7 @@ class Documentation
     }
 
     /**
-     * Get the publicly available versions of the documentation
+     * Get the publicly available versions of the documentation.
      *
      * @return array
      */
@@ -168,11 +175,11 @@ class Documentation
     {
         return [
             'master' => 'Master',
-            '10.x' => '10.x',
-            '9.x' => '9.x',
-            '8.x' => '8.x',
-            '7.x' => '7.x',
-            '6.x' => '6.x',
+            '10.x'   => '10.x',
+            '9.x'    => '9.x',
+            '8.x'    => '8.x',
+            '7.x'    => '7.x',
+            '6.x'    => '6.x',
             // '6.0' => '6.0',
             '5.8' => '5.8',
             '5.7' => '5.7',

@@ -1,18 +1,17 @@
 <?php
 
-use App\Documentation;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DocsController;
+use Illuminate\Support\Facades\Route;
 
-if (! defined('DEFAULT_VERSION')) {
+if (!defined('DEFAULT_VERSION')) {
     define('DEFAULT_VERSION', '10.x');
 }
 
-if (! defined('SHOW_VAPOR')) {
+if (!defined('SHOW_VAPOR')) {
     define('SHOW_VAPOR', random_int(1, 2) === 1);
 }
 
-if (! defined('SHOW_PROMO')) {
+if (!defined('SHOW_PROMO')) {
     $int = random_int(1, 3);
 
     if ($int === 1) {
@@ -54,35 +53,35 @@ Route::get('/', function () {
     return view('marketing', [
         'logos' => collect([
             [
-                'company' => 'Bankrate',
+                'company'     => 'Bankrate',
                 'logo-height' => 24,
             ],
             [
-                'company' => 'WWE',
+                'company'     => 'WWE',
                 'logo-height' => 42,
             ],
             [
-                'company' => 'twitch',
+                'company'     => 'twitch',
                 'logo-height' => 32,
             ],
             [
-                'company' => 'The New York Times',
+                'company'     => 'The New York Times',
                 'logo-height' => 31,
             ],
             [
-                'company' => 'Disney',
+                'company'     => 'Disney',
                 'logo-height' => 39,
             ],
             [
-                'company' => 'Warner Bros',
+                'company'     => 'Warner Bros',
                 'logo-height' => 37,
             ],
             [
-                'company' => 'About You',
+                'company'     => 'About You',
                 'logo-height' => 28,
             ],
             [
-                'company' => 'St. Jude',
+                'company'     => 'St. Jude',
                 'logo-height' => 61,
             ],
         ])->shuffle(),
@@ -93,52 +92,52 @@ Route::get('team', function () {
     return view('team', [
         'team' => [
             [
-                'name' => 'Taylor Otwell',
-                'github_username' => 'taylorotwell',
+                'name'             => 'Taylor Otwell',
+                'github_username'  => 'taylorotwell',
                 'twitter_username' => 'taylorotwell',
-                'location' => 'United States',
+                'location'         => 'United States',
             ], [
-                'name' => 'Dries Vints',
-                'github_username' => 'driesvints',
+                'name'             => 'Dries Vints',
+                'github_username'  => 'driesvints',
                 'twitter_username' => 'driesvints',
-                'location' => 'Belgium',
+                'location'         => 'Belgium',
             ], [
-                'name' => 'James Brooks',
-                'github_username' => 'jbrooksuk',
+                'name'             => 'James Brooks',
+                'github_username'  => 'jbrooksuk',
                 'twitter_username' => 'jbrooksuk',
-                'location' => 'United Kingdom',
+                'location'         => 'United Kingdom',
             ], [
-                'name' => 'Nuno Maduro',
-                'github_username' => 'nunomaduro',
+                'name'             => 'Nuno Maduro',
+                'github_username'  => 'nunomaduro',
                 'twitter_username' => 'enunomaduro',
-                'location' => 'Portugal',
+                'location'         => 'Portugal',
             ], [
-                'name' => 'Mior Muhammad Zaki Mior Khairuddin',
-                'github_username' => 'crynobone',
+                'name'             => 'Mior Muhammad Zaki Mior Khairuddin',
+                'github_username'  => 'crynobone',
                 'twitter_username' => 'crynobone',
-                'location' => 'Malaysia',
+                'location'         => 'Malaysia',
             ], [
-                'name' => 'Jess Archer',
-                'github_username' => 'jessarcher',
+                'name'             => 'Jess Archer',
+                'github_username'  => 'jessarcher',
                 'twitter_username' => 'jessarchercodes',
-                'location' => 'Australia',
+                'location'         => 'Australia',
             ], [
-                'name' => 'Guus Leeuw',
-                'github_username' => 'phpguus',
+                'name'             => 'Guus Leeuw',
+                'github_username'  => 'phpguus',
                 'twitter_username' => 'phpguus',
-                'location' => 'Ireland',
+                'location'         => 'Ireland',
             ], [
-                'name' => 'Tim MacDonald',
-                'github_username' => 'timacdonald',
+                'name'             => 'Tim MacDonald',
+                'github_username'  => 'timacdonald',
                 'twitter_username' => 'timacdonald87',
-                'location' => 'Australia',
+                'location'         => 'Australia',
             ], [
-                'name' => 'Joe Dixon',
-                'github_username' => 'joedixon',
+                'name'             => 'Joe Dixon',
+                'github_username'  => 'joedixon',
                 'twitter_username' => '_joedixon',
-                'location' => 'United Kingdom',
+                'location'         => 'United Kingdom',
             ],
-        ]
+        ],
     ]);
 })->name('team');
 

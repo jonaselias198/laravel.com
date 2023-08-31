@@ -2,12 +2,12 @@
 
 namespace App\Markdown;
 
-use League\CommonMark\Extension\ExtensionInterface;
-use League\CommonMark\Extension\Table\TableExtension;
-use League\CommonMark\Extension\Autolink\AutolinkExtension;
-use League\CommonMark\Extension\TaskList\TaskListExtension;
 use League\CommonMark\Environment\EnvironmentBuilderInterface;
+use League\CommonMark\Extension\Autolink\AutolinkExtension;
+use League\CommonMark\Extension\ExtensionInterface;
 use League\CommonMark\Extension\Strikethrough\StrikethroughExtension;
+use League\CommonMark\Extension\Table\TableExtension;
+use League\CommonMark\Extension\TaskList\TaskListExtension;
 
 final class GithubFlavoredMarkdownExtension implements ExtensionInterface
 {
